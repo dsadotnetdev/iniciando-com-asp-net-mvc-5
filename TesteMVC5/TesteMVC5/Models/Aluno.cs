@@ -23,12 +23,5 @@ namespace TesteMVC5.Models
         public DateTime DataMatricula { get; set; }
 
         public bool Ativo { get; set; }
-
-        [Required(ErrorMessage = "O campo {0} é requerido")]
-        public string Senha { get; set; }
-
-        [Compare("Senha", ErrorMessage = "As senhas informadas não conferem")]
-        [Required(ErrorMessage = "O campo {0} é requerido")]
-        public string SenhaConfirmacao { get; set; }
     }
 }
