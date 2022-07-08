@@ -4,16 +4,31 @@ namespace TesteMVC5.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("")]
         public ViewResult Index()
         {
             return View();
         }
 
+        [Route("sobre-nos")]
+        public ViewResult About()
+        {
+            return View();
+        }
+
+        [Route("institucional/entre-em-contato")]
+        public ViewResult Contact()
+        {
+            return View();
+        }
+
+        [Route("content-result")]
         public ContentResult ContentResult()
         {
             return Content("Olá");
         }
 
+        [Route("downloads/meu-arquivo")]
         public FileContentResult FileContentResult()
         {
             var foto = System.IO.File.ReadAllBytes(Server.MapPath("/content/images/capa.png"));
