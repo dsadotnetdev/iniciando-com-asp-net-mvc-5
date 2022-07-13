@@ -7,12 +7,15 @@ using System;
 
 namespace AppMvc.Controllers
 {
+    [Authorize]
     public class AlunosController : Controller
     {
         private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
+        [OutputCache(Duration = 60)]
         [Route("listar-alunos")]
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
             return View(await db.Alunos.ToListAsync());
@@ -41,6 +44,8 @@ namespace AppMvc.Controllers
 
         [HttpPost]
         [Route("novo-aluno")]
+        [HandleError(ExceptionType = typeof(NullReferenceException), View = "Erro")]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Nome,Email,CPF,Descricao,Ativo")] Aluno aluno)
         {
