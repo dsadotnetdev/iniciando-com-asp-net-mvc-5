@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -24,6 +26,15 @@ namespace AppMvc.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public DbSet<Aluno> Alunos { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Aluno>().ToTable("Alunos");
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
